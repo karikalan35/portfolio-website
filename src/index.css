@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* Tailwind v4 gates hover: utilities behind @media (hover: hover) by
+   default, meant to stop hover effects sticking after a tap on touch
+   devices. On hybrid devices (touchscreen laptops, some trackpads) that
+   media query can report false even with a real mouse connected, which
+   silently blocks hover styles from ever applying. This site's hover
+   effects are simple color/position changes with no stuck-state risk,
+   so we opt out of the gate and use plain :hover everywhere. */
+@custom-variant hover (&:hover);
+
+@theme {
+  --color-bg: #0a0e17;
+  --color-surface: #0d1424;
+  --color-surface-hover: #101a30;
+  --color-border: #1c2740;
+  --color-border-hover: #2e4a5e;
+  --color-text: #ccd6e6;
+  --color-text-bright: #e6edf7;
+  --color-text-dim: #7c8aa8;
+  --color-accent: #5ff4c0;
+  --color-accent-dim: rgba(95, 244, 192, 0.12);
+  --color-accent-dim-hover: rgba(95, 244, 192, 0.2);
+  --color-accent-border: rgba(95, 244, 192, 0.35);
+  --color-accent-border-strong: rgba(95, 244, 192, 0.4);
+  --color-amber: #f5c451;
+
+  /* Cursor spotlight (Home only via JS)
+     Uses --x/--y CSS vars set by Home.jsx. */
+  --spotlight-color: rgba(95, 244, 192, 0.18);
+  --spotlight-color-strong: rgba(95, 244, 192, 0.28);
+  --spotlight-size: 520px;
+
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+
+/* Reusable custom utilities — thumbnail grid pattern + fade-in, kept as
+   Tailwind @utility so they compose with the rest of the utility system
+   instead of living as separate hand-rolled component CSS. */
+
+@utility page-shell {
+  max-width: 1300px;
+  margin-inline: auto;
+  padding-inline: 48px;
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding-inline: 24px;
+  }
+}
+
+@utility bg-grid-pattern {
+  background-image:
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-color: #0b1120;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility fade-up {
+  animation: fadeUp 0.5s ease both;
+}
+
+/* Base element styles (reset + accessibility) — not component styling,
+   so these stay as plain global rules rather than per-element utilities. */
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    1000px circle at var(--x, 50%) var(--y, 50%),
+    rgba(95, 244, 192, 0.07) 0%,
+    rgba(95, 244, 192, 0.03) 35%,
+    transparent 60%
+  );
+  transition: opacity 0.2s ease;
+}
+
+@media (max-width: 860px) {
+  .cursor-glow {
+    display: none; /* no pointer on touch devices */
+  }
+}
