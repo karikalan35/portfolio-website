@@ -20,7 +20,7 @@ export default function ProjectCard({ project }) {
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-contain px-2 py-1"
+              className="w-full h-full object-cover"
             />
             <span className="absolute inset-0 bg-black/0 group-hover:bg-black/40 group-focus-visible:bg-black/40 transition-colors duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100">
               <span className="flex items-center gap-1.5 font-mono text-[0.72rem] text-text-bright bg-black/60 border border-border rounded px-2.5 py-1">

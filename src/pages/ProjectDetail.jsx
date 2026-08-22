@@ -38,7 +38,7 @@ export default function ProjectDetail() {
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-contain px-3 py-2"
+              className="w-full h-full object-cover"
             />
             <span className="absolute inset-0 bg-black/0 group-hover:bg-black/40 group-focus-visible:bg-black/40 transition-colors duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100">
               <span className="flex items-center gap-1.5 font-mono text-[0.78rem] text-text-bright bg-black/60 border border-border rounded px-3 py-1.5">
@@ -156,14 +156,14 @@ export default function ProjectDetail() {
             {project.screenshots.map((src, i) => (
               <button
                 key={src}
-                className="h-[110px] w-full rounded-md border border-border bg-grid-pattern bg-[length:14px_14px] cursor-pointer group relative p-1.5 overflow-hidden transition-colors duration-200 hover:border-accent-border focus-visible:border-accent-border"
+                className="h-[110px] w-full rounded-md border border-border bg-grid-pattern bg-[length:14px_14px] cursor-pointer group relative overflow-hidden transition-colors duration-200 hover:border-accent-border focus-visible:border-accent-border"
                 onClick={() => setLightboxSrc(src)}
                 aria-label={`View ${project.title} screenshot ${i + 1} full size`}
               >
                 <img
                   src={src}
                   alt={`${project.title} screenshot ${i + 1}`}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
                 <span className="absolute inset-0 bg-black/0 group-hover:bg-black/40 group-focus-visible:bg-black/40 transition-colors duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100">
                   <ZoomIn size={18} className="text-text-bright" />

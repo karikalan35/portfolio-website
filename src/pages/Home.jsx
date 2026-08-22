@@ -1,9 +1,9 @@
 
 import { Link } from "react-router-dom";
-import { Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "../components/icons";
+import { FiverrIcon, GithubIcon, InstagramIcon, LinkedinIcon } from "../components/icons";
 import { PROJECTS, EXPERIENCE } from "../data/projects";
 import ProjectCard from "../components/ProjectCard";
+import ScrollReveal from "../components/ScrollReveal";
 
 export default function Home() {
   const featured = PROJECTS.filter((p) => p.featured).slice(0, 3);
@@ -17,15 +17,14 @@ export default function Home() {
           <header className="sticky top-0 h-screen flex flex-col justify-between pt-24 pb-16 max-[860px]:static max-[860px]:h-auto max-[860px]:pt-16 max-[860px]:pb-8">
             <div>
               <h1 className="text-[2.5rem] font-bold text-text-bright m-0 mb-2 tracking-tight">
-                [Your Name]
+                Karikalan
               </h1>
               <p className="text-[1.1rem] font-semibold text-text m-0 mb-4">
-                Full-Stack Developer &middot; AI &amp; Data Analytics
+                ISMF Student &middot; Full-Stack Developer AI &amp; Data Analytics
               </p>
 
-            <p className="text-[0.95rem] text-text-dim leading-relaxed max-w-[320px] m-0 mb-10">
-              I build web platforms, analytics dashboards, and AI-assisted
-              tools — and dig into the data behind them.
+            <p className="text-[0.88rem] text-text-dim leading-relaxed max-w-[320px] m-0 mb-10">
+              I build full-stack applications, data analytics solutions, and AI-powered tools, combining software development with statistics and data-driven problem solving.
             </p>
 
             <nav
@@ -67,7 +66,7 @@ export default function Home() {
               <GithubIcon size={20} className="text-inherit transition-colors duration-200 group-hover:text-accent" />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/m-kari1550/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
@@ -76,41 +75,55 @@ export default function Home() {
               <LinkedinIcon size={20} className="text-inherit transition-colors duration-200 group-hover:text-accent" />
             </a>
             <a
-              href="#"
-              aria-label="Email"
+              href="https://www.instagram.com/_this_is.karikalan/"
+              aria-label="Instagram"
+              target="_blank"
               className="group text-text-dim transition-all duration-200 hover:text-accent hover:-translate-y-0.5 focus-visible:text-accent focus-visible:-translate-y-0.5"
             >
-              <Mail size={20} className="text-inherit transition-colors duration-200 group-hover:text-accent" />
+              <InstagramIcon size={20} className="text-inherit transition-colors duration-200 group-hover:text-accent" />
+            </a>
+            <a
+              href="https://www.fiverr.com/mkarikalan"
+              aria-label="Fiverr"
+              target="_blank"
+              className="group text-text-dim transition-all duration-200 hover:text-accent hover:-translate-y-0.5 focus-visible:text-accent focus-visible:-translate-y-0.5"
+            >
+              <FiverrIcon size={24} className="text-inherit transition-colors duration-200 group-hover:text-accent" />
             </a>
           </div>
         </header>
 
         <main className="pt-24 pb-16 max-[860px]:pt-0 max-[860px]:pb-12">
-          <section
-            id="about"
-            className="mb-24 scroll-mt-8"
-          >
+          <ScrollReveal>
+            <section id="about" className="mb-24 scroll-mt-8">
             <p className="font-mono text-[0.8rem] text-accent mb-5 flex items-center gap-3 after:content-[''] after:flex-1 after:h-px after:bg-border">
               About
             </p>
             <div className="space-y-4">
-              <p className="text-text leading-[1.75] max-w-[640px] text-base">
-                I'm a computer science student who likes taking projects from
-                a rough idea to something people can actually use — whether
-                that's a full-stack platform, an analytics dashboard, or a
-                small AI-powered tool. Most of what's here came out of
-                coursework or team projects, built with a preference for
-                clear structure over cleverness.
+              <p className="text-text leading-[1.75] max-w-[640px] text-[0.92rem]">
+                I'm an Industrial Statistics and Mathematical Finance (ISMF) student interested in
+                 software development, data analytics, statistics, and applied AI.
+                 I enjoy turning ideas into practical solutions,
+                 from full-stack web applications to AI-powered tools and analytics systems.
               </p>
-              <p className="text-text leading-[1.75] max-w-[640px] text-base">
-                Lately I've been splitting time between full-stack web
-                development, statistics and data analytics, and applied AI —
-                the projects below reflect all three.
-              </p>
-            </div>
-          </section>
+              <p className="text-text leading-[1.75] max-w-[640px] text-[0.92rem]">
+                I work with Python, Java, R, JavaScript, React, Node.js, MongoDB, FastAPI, 
+                Git/GitHub, SQL, and AI tools, along with statistical methods 
+                such as regression, hypothesis testing, time series analysis, and data visualization.
 
-          <section id="experience" className="mb-24 scroll-mt-8">
+                My projects reflect my interest in combining technology, data, and AI to solve real-world problems.
+              </p>
+
+              <p className="text-text leading-[1.75] max-w-[640px] text-[0.92rem]">       
+                My projects reflect my interest in combining technology, data, and AI to solve real-world problems.
+              </p>
+
+            </div>
+            </section>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <section id="experience" className="mb-24 scroll-mt-8">
             <p className="font-mono text-[0.8rem] text-accent mb-5 flex items-center gap-3 after:content-[''] after:flex-1 after:h-px after:bg-border">
               Experience
             </p>
@@ -149,9 +162,11 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </section>
+            </section>
+          </ScrollReveal>
 
-          <section id="projects" className="mb-24 scroll-mt-8">
+          <ScrollReveal>
+            <section id="projects" className="mb-24 scroll-mt-8">
             <p className="font-mono text-[0.8rem] text-accent mb-5 flex items-center gap-3 after:content-[''] after:flex-1 after:h-px after:bg-border">
               Featured Projects
             </p>
@@ -160,7 +175,8 @@ export default function Home() {
                 <ProjectCard project={project} key={project.id} />
               ))}
             </div>
-          </section>
+            </section>
+          </ScrollReveal>
 
           <footer className="font-mono text-[0.78rem] text-text-dim pt-8 border-t border-border mt-8">
             <Link

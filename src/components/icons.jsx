@@ -25,3 +25,46 @@ export function LinkedinIcon({ size = 18, ...props }) {
     </svg>
   );
 }
+
+export function FiverrIcon({ size = 18, ...props }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      {...props}
+    >
+      <text
+        x="4"
+        y="18"
+        fontFamily="Space Mono, monospace"
+        fontSize="15"
+        fontWeight="700"
+        letterSpacing="-1"
+      >
+        fi
+      </text>
+    </svg>
+  );
+}
+
+export function InstagramIcon({ size = 18, ...props }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
