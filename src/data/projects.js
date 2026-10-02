@@ -17,7 +17,7 @@ function getImage(id) {
 // ./screenshots/<project-id>/ (any filenames, sorted alphabetically) and
 // they show up on that project's detail page automatically.
 const screenshotFiles = import.meta.glob(
-  "./screenshots/*/*.{jpg,jpeg,png,webp}",
+  "./screenshots/*/*.{jpg,jpeg,png,webp,gif,mp4,webm,ogg,mov}",
   { eager: true, import: "default" }
 );
 
@@ -37,8 +37,8 @@ const PROJECTS_BASE = [
     year: 2025,
     featured: true,
     description: "A centralized platform for managing university events, registrations, approvals, and participant engagement, with role-based dashboards for admins, organizers, and students.",
-    stack: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
-    github: "https://github.com/karikalan35",
+    stack: ["React", "Node.js", "Express.js", "MongoDB", ],
+    github: "https://github.com/karikalan35/User-Management-For-UEMS.git",
     demo: "#",
     overview: "UEMS replaces scattered spreadsheets and email threads with a single system for running campus events end to end — from an organizer submitting a proposal to a student checking in at the door.",
     problem: "Event approvals were handled over email with no audit trail, students had no central place to discover or register for events, and organizers couldn't see registration numbers until the day of the event.",
@@ -53,30 +53,35 @@ const PROJECTS_BASE = [
     future: "Email notifications on status changes, a waitlist system for capacity-limited events, and exporting attendance reports as CSV.",
   },
   {
-    id: "ai-research-assistant",
-    title: "AI Research Assistant",
-    category: ["AI"],
-    status: "Ongoing",
-    year: 2026,
-    featured: true,
-    description: "An AI-powered research assistant that organizes information, summarizes documents, answers questions, and helps improve day-to-day research productivity.",
-    stack: ["Python", "Generative AI", "Prompt Engineering", "LLM APIs"],
-    github: "#",
-    demo: "#",
-    overview: "A lightweight assistant that sits between a pile of source documents and the question you're actually trying to answer, condensing and cross-referencing material on request.",
-    problem: "Long-form research — papers, reports, notes — piles up faster than it can be read, and finding one specific fact across a dozen documents means re-reading all of them.",
-    solution: "A retrieval-and-summarization pipeline that indexes uploaded documents, answers questions with source references, and produces condensed summaries on demand.",
-    features: ["Document summarization with adjustable length", "Question answering grounded in uploaded sources", "Session memory across a research session"],
-    challenges: "Balancing summary brevity against losing important nuance, and keeping answers grounded in the source material rather than the model's general knowledge.",
-    future: "Multi-document comparison mode and exportable research notes.",
-  },
+  id: "statistical-analysis-agent",
+  title: "AI-Assisted Statistical Analysis & Reporting System",
+  category: ["AI", "Data Science"],
+  status: "Ongoing",
+  year: 2026,
+  featured: true,
+  description: "A two-agent system that runs multiple linear regression analysis in R and turns the verified results into a polished, professional Word report — without ever letting the AI invent or alter a statistical value.",
+  stack: ["Python", "R", "NVIDIA API", "python-docx", "JSON"],
+  github: "#",
+  demo: "#",
+  overview: "A pipeline split into two purpose-built agents: one performs the actual regression analysis, the other turns the verified output into a client-ready document, with a hard boundary between the two so presentation never touches the math.",
+  problem: "Raw statistical output — R model summaries, JSON results, diagnostic plots — isn't something you can hand to a stakeholder as-is. Writing it up by hand every time is repetitive, and letting an LLM write the whole report risks it quietly inventing or misreporting numbers.",
+  solution: "Agent 1 runs the multiple linear regression in R (driven by Python and the NVIDIA API) and writes its output to structured, verifiable files — a narrative report, a results JSON, and registered plot metadata. Agent 2 reads those files, cross-checks every number and figure it plans to use against the source data, optionally asks an LLM to organize the narrative into a document plan, and falls back to a deterministic layout if that response is unusable — then renders everything into a formatted Word report with python-docx.",
+  features: [
+    "Strict separation between statistical computation (Agent 1) and document generation (Agent 2)",
+    "Every number and figure in the report is verified against results.json / plots.json before insertion — the AI can organize content but never invent or edit a value",
+    "Retry and JSON-extraction logic so a malformed LLM response can't crash the pipeline",
+    "Deterministic local fallback that still produces a complete, formatted report if the AI planner fails or is unavailable",
+    "Professional document formatting: styled tables, figure/table numbering, a real heading hierarchy, and document metadata",
+  ],
+  challenges: "Getting an LLM to reliably return well-formed JSON for the document plan, and designing a result-integrity check strict enough that a hallucinated statistic can never reach the final document even if the AI planning step misbehaves.",
+  future: "Support for regression types beyond OLS, and a mode for comparing multiple candidate model fits side by side.",
+},
   {
     id: "data-analytics-dashboard",
     title: "Data Analytics Dashboard",
     category: ["Data Analytics", "Dashboards"],
     status: "Completed",
     year: 2025,
-    featured: true,
     description: "An interactive analytics dashboard that turns raw datasets into meaningful visual insights through charts, KPIs, and reports.",
     stack: ["Python", "SQL", "Power BI"],
     github: "#",
@@ -94,6 +99,7 @@ const PROJECTS_BASE = [
     category: ["Statistics", "Research"],
     status: "Completed",
     year: 2024,
+    
     description: "A collection of statistical analyses involving hypothesis testing, regression models, probability, and real-world data interpretation.",
     stack: ["Python", "SPSS", "Jamovi"],
     github: "#",
@@ -128,6 +134,7 @@ const PROJECTS_BASE = [
     category: ["Web Development"],
     status: "Completed",
     year: 2026,
+    featured: true,
     description: "A personal portfolio website showcasing projects, technical skills, education, and professional experience with modern UI/UX practices.",
     stack: ["React", "Vite", "React Router", "Framer Motion"],
     github: "#",
@@ -182,23 +189,29 @@ export const PROJECTS = PROJECTS_BASE.map((p) => ({
 }));
 
 export const FILTERS = ["All", "AI", "Web Development", "Data Analytics", "Statistics", "Dashboards", "Research"];
-export const STATUS_COLOR = { Completed: "#5ff4c0", Ongoing: "#f5c451" };
+export const STATUS_COLOR = {
+  Completed: "var(--color-accent)",
+  Ongoing: "var(--color-amber)",
+};
 
 export const EXPERIENCE = [
-  {
-    range: "2025 — Present",
-    title: "Team Lead & Full-Stack Developer",
-    org: "University Event Management System · Academic Project",
-    description: "Leading a four-person team building a role-based MERN event platform. Own the shared foundation layer and integration — auth, middleware, the shared BookingCalendar component, and the navy/gold design system used across all three role dashboards.",
-    stack: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
-  },
-  {
-    range: "Present",
-    title: "B.Sc. Computer Science — in progress",
-    org: "University of Colombo · Faculty of Science · ISMF",
-    description: "Coursework spanning full-stack web development, databases, and statistics, applied hands-on through independent and group projects.",
-    stack: [],
-  },
+
+{
+  range: "— in progress",
+  title: "B.Sc. Industrial Statistics & Mathematical Finance ",
+  org: "University of Colombo · Faculty of Science · ISMF",
+  description: "Developing a combined foundation in statistics, mathematical finance, programming, and data analysis, with hands-on experience applying these skills through software, statistical analysis, and academic projects.",
+  stack: ["Python", "R", "Statistics", "Data Analysis"],
+},
+
+{
+  range: "— 2026",
+  title: "Team Leader",
+  org: "University Event Management System · Academic Team Project",
+  description: "Leading a four-person team developing a role-based MERN university event management platform. Coordinating development and contributing to authentication, user management, middleware, shared React components, database integration, and the platform's UI design system.",
+  stack: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+},
+
 ];
 
 export function initials(title) {

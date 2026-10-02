@@ -6,7 +6,7 @@ import ProjectCard from "../components/ProjectCard";
 import ScrollReveal from "../components/ScrollReveal";
 
 export default function Home() {
-  const featured = PROJECTS.filter((p) => p.featured).slice(0, 3);
+  const featured = PROJECTS.filter((p) => p.featured).slice(0, 4);
 
 
 

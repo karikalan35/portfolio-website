@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { X } from "lucide-react";
 
+function isVideo(src) {
+  return /\.(mp4|webm|ogg|mov)(\?|$)/i.test(src);
+}
+
 export default function Lightbox({ src, alt, onClose }) {
   useEffect(() => {
     if (!src) return;
@@ -36,12 +40,24 @@ export default function Lightbox({ src, alt, onClose }) {
         <X size={26} />
       </button>
 
-      <img
-        src={src}
-        alt={alt}
-        className="max-w-[92vw] max-h-[86vh] w-auto h-auto object-contain rounded-md shadow-2xl cursor-default"
-        onClick={(e) => e.stopPropagation()}
-      />
+      {isVideo(src) ? (
+        <video
+          src={src}
+          aria-label={alt}
+          className="max-w-[92vw] max-h-[86vh] w-auto h-auto object-contain rounded-md shadow-2xl cursor-default"
+          controls
+          autoPlay
+          loop
+          onClick={(e) => e.stopPropagation()}
+        />
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          className="max-w-[92vw] max-h-[86vh] w-auto h-auto object-contain rounded-md shadow-2xl cursor-default"
+          onClick={(e) => e.stopPropagation()}
+        />
+      )}
 
       <span className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[0.75rem] text-text-dim">
         Press Esc or click outside to close

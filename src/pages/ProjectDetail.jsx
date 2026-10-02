@@ -5,6 +5,10 @@ import { GithubIcon } from "../components/icons";
 import { PROJECTS, STATUS_COLOR, initials } from "../data/projects";
 import Lightbox from "../components/Lightbox";
 
+function isVideo(src) {
+  return /\.(mp4|webm|ogg|mov)(\?|$)/i.test(src);
+}
+
 export default function ProjectDetail() {
   const { id } = useParams();
   const index = PROJECTS.findIndex((p) => p.id === id);
@@ -160,11 +164,23 @@ export default function ProjectDetail() {
                 onClick={() => setLightboxSrc(src)}
                 aria-label={`View ${project.title} screenshot ${i + 1} full size`}
               >
-                <img
-                  src={src}
-                  alt={`${project.title} screenshot ${i + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                {isVideo(src) ? (
+                  <video
+                    src={src}
+                    aria-label={`${project.title} screenshot ${i + 1}`}
+                    className="w-full h-full object-cover"
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <img
+                    src={src}
+                    alt={`${project.title} screenshot ${i + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                )}
                 <span className="absolute inset-0 bg-black/0 group-hover:bg-black/40 group-focus-visible:bg-black/40 transition-colors duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100">
                   <ZoomIn size={18} className="text-text-bright" />
                 </span>
