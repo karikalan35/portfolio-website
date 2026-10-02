@@ -99,7 +99,7 @@ const PROJECTS_BASE = [
     category: ["Statistics", "Research"],
     status: "Completed",
     year: 2024,
-    
+    featured: true,
     description: "A collection of statistical analyses involving hypothesis testing, regression models, probability, and real-world data interpretation.",
     stack: ["Python", "SPSS", "Jamovi"],
     github: "#",
